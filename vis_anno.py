@@ -16,7 +16,7 @@ def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('--dataset-dir',
                         help='Path to MOW dataset containing "objects" and "models" folders',
-                        default='example')
+                        default='/home/austin/cv/datasets/mow')
     parser.add_argument('--clip',
                         help='name of clip to show ("image_id" entry in poses.json)',
                         default='board_food_v_LUS1jeTGc68_frame000082')
