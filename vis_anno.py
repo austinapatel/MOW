@@ -1,5 +1,6 @@
 import argparse
 import cv2
+import matplotlib.pyplot as plt
 import neural_renderer as nr
 import os
 import random
@@ -20,6 +21,13 @@ def parse_args():
     parser.add_argument('--clip',
                         help='name of clip to show ("image_id" entry in poses.json)',
                         default='board_food_v_LUS1jeTGc68_frame000082')
+    parser.add_argument('--offscreen',
+                        help='Pass this flag to skip showing window with result',
+                        action='store_true',
+                        default=False)
+    parser.add_argument('--out-dir',
+                        help='Directory to store visualization',
+                        default=None)
     return parser.parse_args()
 
 
@@ -96,5 +104,11 @@ if __name__ == '__main__':
         [model, hand],
         image=im
     )
-    plt.imshow(im_vis)
-    plt.show()
+
+    if args.out_dir is not None:
+        os.makedirs(args.out_dir, exist_ok=True)
+        plt.imsave(f'{args.out_dir}/mow.jpg', im_vis)
+
+    if not args.offscreen:
+        plt.imshow(im_vis)
+        plt.show()
